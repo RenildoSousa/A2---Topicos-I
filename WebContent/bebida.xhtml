@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>Cadastro de Bebida</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+
+	<center>
+		<h1>Cadastro de Bebida</h1>
+
+		<h:messages style="color:red" />
+		<h:form>
+			<h:panelGrid columns="2">
+
+				<h:outputLabel value="Nome: " />
+				<h:inputText value="#{bebidaController.bebida.nome}" />
+
+				<h:outputLabel value="Marca: " />
+				<h:selectOneMenu value="#{bebidaController.bebida.marca}">
+					<f:selectItem itemLabel="Selecione ..." />
+					<f:selectItems value="#{bebidaController.listaMarca}" var="marca"
+						itemLabel="#{marca.label}" itemValue="#{marca}" />
+				</h:selectOneMenu>
+
+				<h:outputLabel value="Categoria: " />
+				<h:selectOneMenu value="#{bebidaController.bebida.categoria}">
+					<f:selectItem itemLabel="Selecione ..." />
+					<f:selectItems value="#{bebidaController.listaCategoria}"
+						var="categoria" itemLabel="#{categoria.label}"
+						itemValue="#{categoria}" />
+				</h:selectOneMenu>
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="4">
+				<h:commandButton value="Incluir"
+					disabled="#{bebidaController.bebida.id != null}"
+					actionListener="#{bebidaController.incluir}" />
+
+				<h:commandButton value="Alterar"
+					disabled="#{bebidaController.bebida.id == null}"
+					actionListener="#{bebidaController.alterar}" />
+
+				<h:commandButton value="Excluir"
+					disabled="#{bebidaController.bebida.id == null}"
+					actionListener="#{bebidaController.excluir}" />
+
+				<h:commandButton value="Limpar"
+					actionListener="#{bebidaController.limpar}" />
+
+			</h:panelGrid>
+
+			<h:dataTable value="#{bebidaController.listaBebida}" var="obj">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					<h:outputLabel value="#{obj.id}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:commandLink value="#{obj.nome}"
+						actionListener="#{bebidaController.editar(obj.id)}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Marca</f:facet>
+					<h:outputLabel value="#{obj.marca.label}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Categoria</f:facet>
+					<h:outputLabel value="#{obj.categoria.label}" />
+				</h:column>
+
+			</h:dataTable>
+
+		</h:form>
+
+	</center>
+</h:body>
+</html>
