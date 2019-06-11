@@ -1,2 +1,3 @@
 # Boteco
-"Tópicos I - Guilherme e Renildo"
+"Tópicos I - Guilherme Melo e Renildo Sousa"
+"Trabalho - Boteco"
